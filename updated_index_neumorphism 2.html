@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prompt Generator</title>
+  
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E0E5EC; /* Light grey background */
+    color: #333;
+    line-height: 1.6;
+  }
+  .container {
+    padding: 20px;
+  }
+  .row {
+    display: flex;
+    margin-bottom: -0px;
+    flex-wrap: wrap;
+  }
+  .column {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  select, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 10px;
+    background: #E0E5EC;
+    box-shadow: 6px 6px 16px 0 #A3B1C6, -6px -6px 16px 0 #FFFFFF;
+  }
+  button {
+    background-color: #E0E5EC;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    margin: -2.5px 0;
+    border-radius: 10px;
+    box-shadow: 6px 6px 16px 0 #A3B1C6, -6px -6px 16px 0 #FFFFFF;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #D1D9E6;
+  }
+  output {
+    background-color: #E0E5EC;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: inset 6px 6px 16px 0 #A3B1C6, inset -6px -6px 16px 0 #FFFFFF;
+    margin-top: 20px;
+  }
+</style>
+
+</head>
+<body>
+
+  <div class="row">
+    <div class="column">
+      <span>표현 방식</span>
+    </div>
+    <div class="column">
+      <select id="MEDIUM"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemMEDIUM" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('MEDIUM', 'newItemMEDIUM')">추가</button>
+      <button onclick="removeItem('MEDIUM')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>일반적 설명</span>
+    </div>
+    <div class="column">
+      <select id="GENERAL DESCRIPTION"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemGENERAL DESCRIPTION" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('GENERAL DESCRIPTION', 'newItemGENERAL DESCRIPTION')">추가</button>
+      <button onclick="removeItem('GENERAL DESCRIPTION')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>장소</span>
+    </div>
+    <div class="column">
+      <select id="LOCATION"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemLOCATION" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('LOCATION', 'newItemLOCATION')">추가</button>
+      <button onclick="removeItem('LOCATION')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>부가적 설명</span>
+    </div>
+    <div class="column">
+      <select id="SPECIFIC DETAILS"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemSPECIFIC DETAILS" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('SPECIFIC DETAILS', 'newItemSPECIFIC DETAILS')">추가</button>
+      <button onclick="removeItem('SPECIFIC DETAILS')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>감정</span>
+    </div>
+    <div class="column">
+      <select id="EMOTIONS"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemEMOTIONS" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('EMOTIONS', 'newItemEMOTIONS')">추가</button>
+      <button onclick="removeItem('EMOTIONS')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>시간</span>
+    </div>
+    <div class="column">
+      <select id="HOUR"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemHOUR" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('HOUR', 'newItemHOUR')">추가</button>
+      <button onclick="removeItem('HOUR')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>조명</span>
+    </div>
+    <div class="column">
+      <select id="LIGHTING"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemLIGHTING" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('LIGHTING', 'newItemLIGHTING')">추가</button>
+      <button onclick="removeItem('LIGHTING')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>환경</span>
+    </div>
+    <div class="column">
+      <select id="AMBIENT"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemAMBIENT" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('AMBIENT', 'newItemAMBIENT')">추가</button>
+      <button onclick="removeItem('AMBIENT')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>참조 아티스트</span>
+    </div>
+    <div class="column">
+      <select id="ARTIST STYLE"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemARTIST STYLE" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('ARTIST STYLE', 'newItemARTIST STYLE')">추가</button>
+      <button onclick="removeItem('ARTIST STYLE')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>필름 스타일</span>
+    </div>
+    <div class="column">
+      <select id="FILM STYLE"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemFILM STYLE" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('FILM STYLE', 'newItemFILM STYLE')">추가</button>
+      <button onclick="removeItem('FILM STYLE')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>이미지 타입</span>
+    </div>
+    <div class="column">
+      <select id="SHOT TYPE"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemSHOT TYPE" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('SHOT TYPE', 'newItemSHOT TYPE')">추가</button>
+      <button onclick="removeItem('SHOT TYPE')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>기타 태그</span>
+    </div>
+    <div class="column">
+      <select id="TAGS"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemTAGS" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('TAGS', 'newItemTAGS')">추가</button>
+      <button onclick="removeItem('TAGS')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>이미지의 장르</span>
+    </div>
+    <div class="column">
+      <select id="MOVIE GENRE/PHOTOGRAPHY STYLE"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemMOVIE GENRE/PHOTOGRAPHY STYLE" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('MOVIE GENRE/PHOTOGRAPHY STYLE', 'newItemMOVIE GENRE/PHOTOGRAPHY STYLE')">추가</button>
+      <button onclick="removeItem('MOVIE GENRE/PHOTOGRAPHY STYLE')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>종횡비</span>
+    </div>
+    <div class="column">
+      <select id="ASPECT RATIO"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemASPECT RATIO" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('ASPECT RATIO', 'newItemASPECT RATIO')">추가</button>
+      <button onclick="removeItem('ASPECT RATIO')">선택 항목 제거</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <span>카오스 파라미터</span>
+    </div>
+    <div class="column">
+      <select id="CHAOS"></select>
+    </div>
+    <div class="column">
+      <input type="text" id="newItemCHAOS" placeholder="새 항목">
+    </div>
+    <div class="column">
+      <button onclick="addItem('CHAOS', 'newItemCHAOS')">추가</button>
+      <button onclick="removeItem('CHAOS')">선택 항목 제거</button>
+    </div>
+  </div>
+
+</body>
+</html>
+
+<script>
+  function addItem(listId, newItemId) {
+    var list = document.getElementById(listId);
+    var newItem = document.getElementById(newItemId).value;
+    var option = document.createElement("option");
+    option.text = newItem;
+    list.add(option);
+  }
+
+  function removeItem(listId) {
+    var list = document.getElementById(listId);
+    list.remove(list.selectedIndex);
+  }
+
+  function generatePrompt() {
+    console.log('generatePrompt called');
+    var prompts = [];
+    var promptElements = document.querySelectorAll('select');
+    promptElements.forEach(function(element) {
+      var selectedValue = element.options[element.selectedIndex].value;
+      if (selectedValue !== '') {
+        prompts.push(selectedValue);
+      }
+    });
+    var completePrompt = prompts.join(' ');
+    document.getElementById('output').innerText = completePrompt;
+    console.log('Prompt generated:', completePrompt);
+  }
+
+  function copyToClipboard() {
+    console.log('copyToClipboard called');
+    var completePrompt = document.getElementById('output').innerText;
+    navigator.clipboard.writeText(completePrompt);
+    console.log('Prompt copied:', completePrompt);
+  }
+</script>
+
+<script>
+  window.onload = function() {
+    var data = {'MEDIUM': ['Real Photography of ', 'Photography of ', 'Cinematic shot of ', 'Film scene of ', 'VHS Grab of ', 'DVD Grab of ', 'Candid Real Photography of ', 'Album cover, ', 'Storyboard linedrawing style, '], 'GENERAL DESCRIPTION': [], 'LOCATION': [], 'SPECIFIC DETAILS': [], 'EMOTIONS': ['Happy,', 'Sad,', 'Angry,', 'Scared,', 'Excited,', 'Nervous,', 'Confused,', 'Surprised,', 'Curious,', 'Hopeful,', 'Desperate,', 'Frustrated,', 'Amused,', 'Bored,', 'Envious,', 'Proud,', 'Grateful,', 'Guilty,', 'Peaceful,', 'Content,', 'Weird,', 'Melancholy, ', 'Crazy, ', 'Scary, ', 'Funny, ', 'Lonely, ', 'Lovely, ', 'Love, ', 'Ironic, ', 'Creepy, ', 'weird situation, ', 'Trippy, ', 'psychedelic, '], 'HOUR': ['Dawn,', 'Early morning,', 'Mid-morning,', 'Late morning,', 'Noon,', 'day time, ', 'Afternoon,', 'Golden hour,', 'Sunset,', 'Twilight,', 'Dusk,', 'Evening,', 'Early night,', 'Night, ', 'Mid-night,', 'Late night,', 'Pre-dawn,'], 'LIGHTING': ['Cinematic lighting,', 'Natural lighting,', 'Studio lighting,', 'Soft lighting,', 'Hard lighting,', 'Three-point lighting,', 'Rembrandt lighting,', 'Ambient lighting,', 'Orange and teal lighting,', 'Backlighting,', 'Front lighting,', 'Side lighting,', 'Top lighting,', 'Bottom lighting,', 'Butterfly lighting,', 'Four-point lighting,', 'Five-point lighting,', 'Artificial light,', 'Red light,', 'Neon light, ', 'stage light, ', 'Flash light, ', 'Low key lighting, ', 'High key lighting, ', 'Dramatic lighting, '], 'AMBIENT': ['Cloudy,', 'Foggy,', 'Sunny,', 'Rainy,', 'Snowy,', 'Misty,', 'Windy,', 'Stormy,', 'Hazy,', 'Dusty,', 'Smoky,', 'Overcast,', 'Gloomy,', 'Bright,', 'Clear,', 'Tranquil,', 'Chaotic,', 'Spring,', 'Summer,', 'Autumn,', 'Winter,'], 'ARTIST STYLE': ['STREET PHOTOGRAPHY----------', 'Photography style of Vivian Maier,', 'Photography style of Bruce Davidson,', 'Photography style of Meryl Meisler,', 'Photography style of Martha Cooper,', 'Photography style of Janet Delaney,', 'Photography style of Garry Winogrand,', 'Photography style of Henri Cartier-Bresson,', 'Photography style of Janette Beckman,', 'Photography style of Jamel Shabazz,', 'PORTRAIT PHOTOGRAPHY----------', 'Photography style of Petra Collins, ', 'Photography style of Diane Arbus,', 'Photography style of Robert Mapplethorpe,', 'Photography style of Richard Avedon,', 'Photography style of Annie Leibovitz,', 'Photography style of Richard Corman, ', 'Photography style of Derek Ridgers,', 'Photography style of Sage Sohier,', 'CINEMATIC PHOTOGRAPHY----------', 'Photography style of Wes Anderson, ', 'Photography style of Stanley Kubrick,', 'Photography style of Wes Craven,', 'Photography style of James Wan,', 'Photography style of Zack Snyder,', 'Photography style of Steven Spielberg,', 'Photography style of Martin Scorsese,', 'Photography style of Quentin Tarantino,', 'Photography style of Christopher Nolan,', 'Photography style of James Cameron,', 'Photography style of Guillermo del Toro,', 'Photography style of Ridley Scott,', 'Photography style of Matt and Ross Duffer, ', 'Photography style of Shawn Levy, ', 'Photography style of anthony russo and joseph russo, ', 'SURREALIST PHOTOGRAPHY----------', 'Photography style of David LaChapelle,', 'Photography style of Salvador Dalí,', 'Photography style of Jerry Uelsmann,', 'Photography style of Man Ray,', 'FASHION PHOTOGRAPHY----------', 'Photography style of Frank Horvat,', 'Photography style of Helmut Newton,', 'Photography style of Irving Penn,', 'MODERNIST PHOTOGRAPHY----------', 'Photography style of Edward Weston,', 'DOCUMENTARY PHOTOGRAPHY----------', 'Photography style of Dorothea Lange,', 'Photography style of Robert Frank,', 'Photography style of Nan Goldin,', 'HORROR PHOTOGRAPHY----------', 'Photography style of Joshua Hoffine,', 'FINE ART PHOTOGRAPHY----------', 'Photography style of Ralph Gibson,', 'Photography style of Andreas Gursky,', 'ALBUM COVER PHOTOGRAPHY----------', 'Photography style of Storm Thorgerson,', 'PHOTO JOURNALISM----------', 'Photography style of Steve Mc Curry,', 'MORE ARTISTS----------', 'Professional Photographer, ', 'Style of Barrie Gower, '], 'FILM STYLE': ['PHOTOGRAPHY---------------', 'Kodak Gold 200,', 'Kodak Ektar 100,', 'Fujifilm Pro 400H,', 'Kodak Portra 800,', 'Agfa Vista 400,', 'Fujifilm Superia 400,', 'Kodak Ultramax 400,', 'Kodak Colorplus 200,', 'Fujifilm Velvia 50,', 'Fujifilm Provia 100F,', 'Polaroid instant photograph, ', 'MOVIES----------------------', 'Kodak Vision3 50D,', 'Kodak Vision3 200T,', 'Kodak Vision3 500T,', 'Fujifilm Eterna Vivid 250D,', 'Fujifilm Eterna 500T,', 'Fujifilm Reala 500D,', 'Fujifilm Superia 200,', 'Fujifilm Superia Venus 800,', 'Fujifilm Astia 100F,', 'Fujifilm Provia 400X,', 'ARRI Alexa Mini LF,', 'ARRI Alexa SXT,', 'ARRI Alexa Mini,', 'ARRI Amira, ', 'ARRI Alexa 65, '], 'SHOT TYPE': ['Portrait,', 'Full body shot,', 'Wide angle shot, ', 'Wide angle full body shot,', 'Full shot, ', 'Medium shot,', 'Close-up shot,', 'Extreme long shot,', 'Medium close-up shot,', 'Two shot,', 'Over-the-shoulder shot,', 'Point of view (POV) shot,', 'Medium long shot,', 'Medium two-shot,', 'Extreme close-up,', 'Dutch angle,', 'High angle shot,', 'Low angle,', 'Crane shot,', 'Tilt shot,', 'gopro, ', 'Macro photography, ', 'Fisheye,', 'Long shot, ', 'Dramatic composition, ', 'symmetrical shot, ', 'renaissance composition style, ', 'Cinematic composition, ', 'Golden ratio shot, ', 'Dramatic shot, ', 'Landscape, ', 'Back shot, ', 'Behind Shot, '], 'TAGS': ['analog, intricate details, sharp, hyperrealistic, hyperdetailed, ', 'analog, f1.2, 35mm, color photo, volumetric light, shallow depth of field, soft glow, intricate details, sharp, very realistic,', 'analog, f1.2, color photo, volumetric light, soft glow, intricate details, sharp, very realistic,', 'analog, f1.2, color photo, volumetric light, soft glow, intricate details, sharp, very realistic, Blockbuster color grading, ', 'analog, f1.2, color photo, volumetric light, soft glow, intricate details, sharp, very realistic, pro mist filter, difussion filter, cinebloom, '], 'MOVIE GENRE/PHOTOGRAPHY STYLE': ['Action,', 'Adventure,', 'Comedy,', 'Crime,', 'Drama,', 'Fantasy,', 'Horror,', 'Musical,', 'Mystery,', 'Romance,', 'Science Fiction,', 'Spy,', 'Thriller,', 'War,', 'Western,', 'Documentary,', 'Historical,', 'Sports,', 'Black and white,', 'Landscape,', 'Street,', 'Fashion,', 'Wildlife,', 'Architecture,', 'Abstract,', 'Still life,', 'High-speed,', 'Low-key,', 'High-key,', 'Infrared,', 'Fine art,', 'Travel,', 'Aerial,', 'Underwater,', 'Freak,', 'Fine Art,', 'Conceptual,', 'Fashion,', 'Landscape,', 'Documentary,', 'Surrealism,', 'Lovecraftian, ', 'psychedelic, ', 'Trippy, ', 'Aesthetic, ', 'In the style of line drawing, ', 'Storyboard, '], 'ASPECT RATIO': ['--ar 1:1', '--ar 2:3', '--ar 3:2', '--ar 16:9', '--ar 9:16', '--ar 2:1', '--ar 1:2', '--ar 4:3', '--ar 3:4', '--ar 5:4', '--ar 4:5', '--ar 21:9', '--ar 7:4', '--ar 4:7'], 'CHAOS': ['--c 5', '--c 10', '--c 20', '--c 30', '--c 40', '--c 50', '--c 60', '--c 70', '--c 80', '--c 90', '--c 100']};
+    for (var key in data) {
+      var list = document.getElementById(key);
+      data[key].forEach(function(item) {
+        var option = document.createElement("option");
+        option.text = item;
+        list.add(option);
+      });
+    }
+  };
+</script>
+
+  <button onclick="generatePrompt()">프롬프트 생성하기</button>
+  <button onclick="copyToClipboard()">프롬프트 복사하기</button>
+
+  <div id="output"></div>
+
+<script>
+  function generatePrompt() {
+    console.log('generatePrompt called');
+    var prompts = [];
+    var promptElements = document.querySelectorAll('select');
+    console.log('Prompt elements:', promptElements);
+    promptElements.forEach(function(element, index) {
+      console.log('Processing element', index);
+      console.log('Element:', element);
+      if (element && element.options && element.selectedIndex >= 0) {
+        var selectedValue = element.options[element.selectedIndex].value;
+        console.log('Selected value:', selectedValue);
+        if (selectedValue !== '') {
+          prompts.push(selectedValue);
+        }
+      } else {
+        console.log('Skipped element', index);
+      }
+    });
+    var completePrompt = prompts.join(' ');
+    document.getElementById('output').innerText = completePrompt;
+    console.log('Prompt generated:', completePrompt);
+  }
+
+  function copyToClipboard() {
+    console.log('copyToClipboard called');
+    var completePrompt = document.getElementById('output').innerText;
+    navigator.clipboard.writeText(completePrompt);
+    console.log('Prompt copied:', completePrompt);
+  }
+</script>
